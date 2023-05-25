@@ -1,8 +1,8 @@
 {
-  "name": "@codistan-isb/api-plugin-product-field-updation",
+  "name": "@codistan-isb/api-plugin-product-field",
   "description": "Boilerplate plugin for the Reaction API",
   "label": "Product Plugin Updation",
-  "version": "6.6.8-development",
+  "version": "6.6.9-development",
   "main": "index.js",
   "type": "module",
   "engines": {
