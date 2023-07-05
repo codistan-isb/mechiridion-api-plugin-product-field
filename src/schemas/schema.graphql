@@ -1,0 +1,169 @@
+extend type Product {
+  countryOfOrigin: String
+  website: String
+  parentCompany: String
+  establishedYear: String
+  # Identification: [Identification]
+  # EngineInformation: [String]
+  # Dimensions: [String]
+  # FuelInformation: [String]
+  # FuelDeliverySystem: String
+  # EngineTechnology: String
+  # Images: String
+  # SendGiff: String
+}
+extend type ProductVariant {
+  countryOfOrigin: String
+  website: String
+  parentCompany: String
+  establishedYear: String
+}
+
+extend type CatalogProduct {
+  countryOfOrigin: String
+  website: String
+  parentCompany: String
+  establishedYear: String
+}
+
+extend input ProductVariantInput {
+  countryOfOrigin: String
+  website: String
+  parentCompany: String
+  establishedYear: String
+}
+
+extend input ProductInput {
+  countryOfOrigin: String
+  website: String
+  parentCompany: String
+  establishedYear: String
+}
+
+type VehicleModel {
+  _id: ID
+  title: String
+  productId: String
+  releaseYear: String
+  bodyType: String
+  engineType: String
+  transmissionType: String
+  fuelType: String
+  driveType: String
+  seatingCapacity: Int
+  priceRange: Float
+  description: String
+}
+input vehicleModelInput {
+  _id: ID
+  title: String
+  productId: String
+  releaseYear: String
+  bodyType: String
+  engineType: String
+  transmissionType: String
+  fuelType: String
+  driveType: String
+  seatingCapacity: Int
+  priceRange: Float
+  description: String
+}
+type VehicleVariant {
+  _id: ID
+  vehicleModelId: ID
+  title: String
+  engineVariant: EngineVariantInformation
+  fuelVariant: FuelVariantInformation
+  description: String
+  dimensionsVariant: dimensionsVariantInformation
+}
+input VehicleVariantInput {
+  vehicleModelId: ID
+  title: String
+  engineVariant: EngineVariantInput
+  fuelVariant: FuelVariantInput
+  description: String
+  dimensionsVariant: dimensionsVariantInput
+}
+type dimensionsVariantInformation {
+  height: Int
+  length: Int
+  width: Int
+}
+input dimensionsVariantInput {
+  height: Int
+  length: Int
+  width: Int
+}
+input EngineVariantInput {
+  driveline: String
+  engineType: String
+  hybrid: Boolean
+  numberOfForwardGears: Int
+  transmission: String
+  horsePower: Int
+  torque: Int
+}
+type EngineVariantInformation {
+  driveline: String
+  engineType: String
+  hybrid: Boolean
+  numberOfForwardGears: Int
+  transmission: String
+  horsePower: Int
+  torque: Int
+}
+type FuelVariantInformation {
+  cityMpg: Int
+  fuelType: String
+  highwayMpg: Int
+}
+input FuelVariantInput {
+  cityMpg: Int
+  fuelType: String
+  highwayMpg: Int
+}
+extend type Mutation {
+  createVehicleModel(input: vehicleModelInput, shopId: String): VehicleModel
+  createVehicleVariant(input: VehicleVariantInput): VehicleVariant
+}
+
+# type Images {
+#   imageLink: String
+# }
+# input ImagesInput {
+#   imageLink: String
+# }
+
+# type SendGiff {
+#   imageLink: String
+# }
+# input SendGiffInput {
+#   imageLink: String
+# }
+
+# input IdentificationInput {
+#   Make: String
+#   ModelYear: Int
+#   Classification: String
+#   ID: String
+#   Year: Int
+# }
+# type Identification {
+#   Make: String
+#   ModelYear: Int
+#   Classification: String
+#   ID: String
+#   Year: Int
+# }
+
+# type Dimensions {
+#   Height: Int
+#   Length: Int
+#   Width: Int
+# }
+# input DimensionsInput {
+#   Height: Int
+#   Length: Int
+#   Width: Int
+# }
