@@ -40,8 +40,8 @@ extend input ProductInput {
   establishedYear: String
 }
 
-type VehicleModel {
-  _id: ID
+type VehicleModel implements Node {
+  _id: ID!
   title: String
   productId: String
   releaseYear: String
@@ -53,6 +53,30 @@ type VehicleModel {
   seatingCapacity: Int
   priceRange: Float
   description: String
+}
+type vehicleModelConnection {
+  "The list of nodes that match the query, wrapped in an edge to provide a cursor string for each"
+  edges: [VehicleModelEdge]
+  """
+  You can request the `nodes` directly to avoid the extra wrapping that `NodeEdge` has,
+  if you know you will not need to paginate the results.
+  """
+  nodes: [VehicleModel]
+  "Information to help a client request the next or previous page"
+  pageInfo: PageInfo!
+  "The total number of nodes that match your query"
+  totalCount: Int!
+}
+type VehicleModelEdge implements NodeEdge {
+  "The cursor that represents this node in the paginated results"
+  cursor: ConnectionCursor!
+  "The Transaction"
+  node: VehicleModel
+}
+type VehicleModelPayload {
+  status: Boolean
+  message: String
+  VehicleModelData: JSON
 }
 input vehicleModelInput {
   _id: ID
@@ -76,6 +100,7 @@ type VehicleVariant {
   fuelVariant: FuelVariantInformation
   description: String
   dimensionsVariant: dimensionsVariantInformation
+  antiBrakeSystem: String
 }
 input VehicleVariantInput {
   vehicleModelId: ID
@@ -84,50 +109,71 @@ input VehicleVariantInput {
   fuelVariant: FuelVariantInput
   description: String
   dimensionsVariant: dimensionsVariantInput
+  antiBrakeSystem: String
 }
 type dimensionsVariantInformation {
-  height: Int
-  length: Int
-  width: Int
+  height: String
+  length: String
+  width: String
+  weight: String
 }
 input dimensionsVariantInput {
-  height: Int
-  length: Int
-  width: Int
+  height: String
+  length: String
+  width: String
+  weight: String
 }
 input EngineVariantInput {
   driveline: String
   engineType: String
   hybrid: Boolean
-  numberOfForwardGears: Int
+  numberOfForwardGears: String
   transmission: String
-  horsePower: Int
-  torque: Int
+  horsePower: String
+  torque: String
 }
 type EngineVariantInformation {
   driveline: String
   engineType: String
   hybrid: Boolean
-  numberOfForwardGears: Int
+  numberOfForwardGears: String
   transmission: String
-  horsePower: Int
-  torque: Int
+  horsePower: String
+  torque: String
 }
 type FuelVariantInformation {
-  cityMpg: Int
+  cityMpg: String
   fuelType: String
-  highwayMpg: Int
+  highwayMpg: String
 }
 input FuelVariantInput {
-  cityMpg: Int
+  cityMpg: String
   fuelType: String
-  highwayMpg: Int
+  highwayMpg: String
 }
 extend type Mutation {
   createVehicleModel(input: vehicleModelInput, shopId: String): VehicleModel
   createVehicleVariant(input: VehicleVariantInput): VehicleVariant
 }
-
+extend type Query {
+  getAllVehicleModel(
+    # searchQuery: String
+    "Return only results that come after this cursor. Use this with `first` to specify the number of results to return."
+    after: ConnectionCursor
+    "Return only results that come before this cursor. Use this with `last` to specify the number of results to return."
+    before: ConnectionCursor
+    "Return at most this many results. This parameter may be used with either `after` or `offset` parameters."
+    first: ConnectionLimitInt
+    "Return at most this many results. This parameter may be used with the `before` parameter."
+    last: ConnectionLimitInt
+    "Return only results that come after the Nth result. This parameter may be used with the `first` parameter."
+    offset: Int
+    "Return results sorted in this order"
+    sortOrder: SortOrder = asc
+    "By default, groups are sorted by when they were created, oldest first. Set this to sort by one of the other allowed fields"
+    sortBy: AccountSortByField = timeSent
+  ): vehicleModelConnection!
+}
 # type Images {
 #   imageLink: String
 # }

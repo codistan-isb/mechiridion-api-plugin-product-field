@@ -4,6 +4,7 @@ const pkg = require("../package.json");
 import resolvers from "./resolvers/index.js";
 import schemas from "./schemas/index.js";
 import mutations from "./mutations/index.js";
+import queries from "./queries/index.js";
 
 // const Identification = new SimpleSchema({
 //   Make: {
@@ -264,6 +265,7 @@ async function register(app) {
       schemas,
     },
     mutations,
+    queries,
   });
 }
 export default register;
