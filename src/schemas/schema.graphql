@@ -53,6 +53,8 @@ type VehicleModel implements Node {
   seatingCapacity: Int
   priceRange: Float
   description: String
+  isDeleted: Boolean
+  isVisible: Boolean
 }
 type vehicleModelConnection {
   "The list of nodes that match the query, wrapped in an edge to provide a cursor string for each"
@@ -91,6 +93,8 @@ input vehicleModelInput {
   seatingCapacity: Int
   priceRange: Float
   description: String
+  isDeleted: Boolean
+  isVisible: Boolean
 }
 type VehicleVariant {
   _id: ID
@@ -101,6 +105,8 @@ type VehicleVariant {
   description: String
   dimensionsVariant: dimensionsVariantInformation
   antiBrakeSystem: String
+  isDeleted: Boolean
+  isVisible: Boolean
 }
 input VehicleVariantInput {
   vehicleModelId: ID
@@ -110,6 +116,8 @@ input VehicleVariantInput {
   description: String
   dimensionsVariant: dimensionsVariantInput
   antiBrakeSystem: String
+  isDeleted: Boolean
+  isVisible: Boolean
 }
 type dimensionsVariantInformation {
   height: String
@@ -151,9 +159,53 @@ input FuelVariantInput {
   fuelType: String
   highwayMpg: String
 }
+input updateVehicleModelInput {
+  "Product input"
+  product: updateVehicleInput!
+
+  "ID of product to update"
+  productId: ID!
+
+  "ID of shop that owns the product to update"
+  shopId: ID!
+}
+input updateVehicleInput {
+  title: String
+  productId: String
+  releaseYear: String
+  bodyType: String
+  engineType: String
+  transmissionType: String
+  fuelType: String
+  driveType: String
+  seatingCapacity: Int
+  priceRange: Float
+  description: String
+  isDeleted: Boolean
+  isVisible: Boolean
+}
+input updateVehicleVariantInput {
+  "Product input"
+  product: VehicleVariantInput!
+
+  "ID of product to update"
+  productId: ID!
+
+  "ID of shop that owns the product to update"
+  shopId: ID!
+}
+type VehicleVariantPayload {
+  status: Boolean
+  message: String
+  VehicleVariantData: JSON
+}
+
 extend type Mutation {
   createVehicleModel(input: vehicleModelInput, shopId: String): VehicleModel
   createVehicleVariant(input: VehicleVariantInput): VehicleVariant
+  updateVehicleModel(input: updateVehicleModelInput): VehicleModelPayload
+  updateVehicleVariant(input: updateVehicleVariantInput): VehicleVariantPayload
+  deleteVehicleVariant(id: ID!): VehicleVariantPayload
 }
 extend type Query {
   getAllVehicleModel(
@@ -173,43 +225,5 @@ extend type Query {
     "By default, groups are sorted by when they were created, oldest first. Set this to sort by one of the other allowed fields"
     sortBy: AccountSortByField = timeSent
   ): vehicleModelConnection!
+  getVehicleModelById(id: ID!): VehicleModel
 }
-# type Images {
-#   imageLink: String
-# }
-# input ImagesInput {
-#   imageLink: String
-# }
-
-# type SendGiff {
-#   imageLink: String
-# }
-# input SendGiffInput {
-#   imageLink: String
-# }
-
-# input IdentificationInput {
-#   Make: String
-#   ModelYear: Int
-#   Classification: String
-#   ID: String
-#   Year: Int
-# }
-# type Identification {
-#   Make: String
-#   ModelYear: Int
-#   Classification: String
-#   ID: String
-#   Year: Int
-# }
-
-# type Dimensions {
-#   Height: Int
-#   Length: Int
-#   Width: Int
-# }
-# input DimensionsInput {
-#   Height: Int
-#   Length: Int
-#   Width: Int
-# }
