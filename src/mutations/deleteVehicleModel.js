@@ -1,7 +1,9 @@
-export default async function deleteVehicleVariant(context, input) {
+import ReactionError from "@reactioncommerce/reaction-error";
+
+export default async function deleteVehicleModel(context, input) {
   console.log("input ", input);
-  const { VehicleVariant } = context.collections;
-  const currentProduct = await VehicleVariant.findOne({
+  const { VehicleModel } = context.collections;
+  const currentProduct = await VehicleModel.findOne({
     _id: input,
   });
   console.log("currentProduct ", currentProduct);
@@ -16,7 +18,8 @@ export default async function deleteVehicleVariant(context, input) {
       updatedAt: new Date(),
     },
   };
-  const { value: updatedAccount } = await VehicleVariant.findOneAndUpdate(
+  console.log("Modifier ", modifier);
+  const { value: updatedAccount } = await VehicleModel.findOneAndUpdate(
     {
       _id: input,
     },
@@ -29,13 +32,13 @@ export default async function deleteVehicleVariant(context, input) {
     return {
       status: true,
       message: "Data updated",
-      VehicleVariantData: updatedAccount,
+      VehicleModelData: updatedAccount,
     };
   } else {
     return {
       status: false,
       message: "Server error",
-      VehicleVariantData: null,
+      VehicleModelData: null,
     };
   }
   //   const newProductVariant = {

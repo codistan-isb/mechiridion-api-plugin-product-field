@@ -1,7 +1,12 @@
 import ReactionError from "@reactioncommerce/reaction-error";
 import { decodeProductOpaqueId } from "../../xforms/id.js";
 
-export default async function getVehicleModelById(parent, args, context, info) {
+export default async function getVehicleVariantById(
+  parent,
+  args,
+  context,
+  info
+) {
   console.log("args Query: ", args);
   if (!context.authToken) {
     throw new ReactionError("access-denied", "Please Login First");
@@ -11,9 +16,7 @@ export default async function getVehicleModelById(parent, args, context, info) {
   }
   let { id } = args;
   id = decodeProductOpaqueId(id);
-  const getVehicleModelByIdResponse = await context.queries.getVehicleModelById(
-    context,
-    id
-  );
-  return getVehicleModelByIdResponse;
+  const getVehicleVariantByIdResponse =
+    await context.queries.getVehicleVariantById(context, id);
+  return getVehicleVariantByIdResponse;
 }
