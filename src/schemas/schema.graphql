@@ -55,6 +55,7 @@ type VehicleModel implements Node {
   description: String
   isDeleted: Boolean
   isVisible: Boolean
+  carClass: String
 }
 type vehicleModelConnection {
   "The list of nodes that match the query, wrapped in an edge to provide a cursor string for each"
@@ -114,15 +115,33 @@ input vehicleModelInput {
   description: String
   isDeleted: Boolean
   isVisible: Boolean
+  carClass: String
 }
 type VehicleVariant implements Node {
   _id: ID!
   vehicleModelId: ID
   title: String
+  generationName: String
+  yearFrom: String
+  yearTo: String
+  batteryCapacityKwPerH: String
+  frontRearAxelLoad: String
+  electricRangeKm: String
+  safetyAssessment: String
+  Series: String
+  bodyType: String
+  Trim: String
+  maxSpeed: String
+  steeringType: String
   engineVariant: EngineVariantInformation
   fuelVariant: FuelVariantInformation
+  dimensionsVariant: DimensionsVariantInformation
+  interiorVariant: InteriorVariantInformation
+  exteriorVariant: ExteriorVariantInformation
+  suspensionVariant: SuspensionVariantInformation
+  brakesVariant: BrakesVariantInformation
+  wheelVariant: WheelVariantInformation
   description: String
-  dimensionsVariant: dimensionsVariantInformation
   antiBrakeSystem: String
   isDeleted: Boolean
   isVisible: Boolean
@@ -130,35 +149,32 @@ type VehicleVariant implements Node {
 input VehicleVariantInput {
   vehicleModelId: ID
   title: String
+  generationName: String
+  yearFrom: String
+  yearTo: String
+  batteryCapacityKwPerH: String
+  frontRearAxelLoad: String
+  electricRangeKm: String
+  safetyAssessment: String
+  Series: String
+  bodyType: String
+  Trim: String
+  maxSpeed: String
+  steeringType: String
   engineVariant: EngineVariantInput
   fuelVariant: FuelVariantInput
-  description: String
   dimensionsVariant: dimensionsVariantInput
+  interiorVariant: InteriorVariantInput
+  exteriorVariant: ExteriorVariantInput
+  suspensionVariant: SuspensionVariantInput
+  brakesVariant: BrakesVariantInput
+  wheelVariant: WheelVariantInput
+  description: String
   antiBrakeSystem: String
   isDeleted: Boolean
   isVisible: Boolean
 }
-type dimensionsVariantInformation {
-  height: String
-  length: String
-  width: String
-  weight: String
-}
-input dimensionsVariantInput {
-  height: String
-  length: String
-  width: String
-  weight: String
-}
-input EngineVariantInput {
-  driveline: String
-  engineType: String
-  hybrid: Boolean
-  numberOfForwardGears: String
-  transmission: String
-  horsePower: String
-  torque: String
-}
+
 type EngineVariantInformation {
   driveline: String
   engineType: String
@@ -167,17 +183,155 @@ type EngineVariantInformation {
   transmission: String
   horsePower: String
   torque: String
+  maximumTorque: String
+  injectionType: String
+  cylinderLayout: String
+  numberOfCylinders: String
+  compressionRatio: String
+  valvesPerCylinder: String
+  boostType: String
+  cylinderBore: String
+  strokeCycle: String
+  enginePlacement: String
+  turnoverOfMaximumTorqueRpm: String
+  maxPower: String
+  capacity: String
+  engineHp: String
+  engineHpRpm: String
+  presenceOfIntercooler: String
 }
+
+input EngineVariantInput {
+  driveline: String
+  engineType: String
+  hybrid: Boolean
+  numberOfForwardGears: String
+  transmission: String
+  horsePower: String
+  torque: String
+  maximumTorque: String
+  injectionType: String
+  cylinderLayout: String
+  numberOfCylinders: String
+  compressionRatio: String
+  valvesPerCylinder: String
+  boostType: String
+  cylinderBore: String
+  strokeCycle: String
+  enginePlacement: String
+  turnoverOfMaximumTorqueRpm: String
+  maxPower: String
+  capacity: String
+  engineHp: String
+  engineHpRpm: String
+  presenceOfIntercooler: String
+}
+
+type DimensionsVariantInformation {
+  height: String
+  length: String
+  width: String
+  weight: String
+  curbWeight: String
+  ullWeight: String
+  payloadWeight: String
+}
+input DimensionsVariantInput {
+  height: String
+  length: String
+  width: String
+  weight: String
+  curbWeight: String
+  ullWeight: String
+  payloadWeight: String
+}
+
+type InteriorVariantInformation {
+  numberOfSeats: String
+  maxTrunkCapacity: String
+  minimumTrunkCapacity: String
+}
+
+input InteriorVariantInput {
+  numberOfSeats: String
+  maxTrunkCapacity: String
+  minimumTrunkCapacity: String
+}
+
+type ExteriorVariantInformation {
+  numberOfDoors: String
+  clearanceMm: String
+  groundClearance: String
+}
+
+input ExteriorVariantInput {
+  numberOfDoors: String
+  clearanceMm: String
+  groundClearance: String
+}
+
+type SuspensionVariantInformation {
+  backSuspension: String
+  frontSuspension: String
+}
+
+input SuspensionVariantInput {
+  backSuspension: String
+  frontSuspension: String
+}
+
 type FuelVariantInformation {
   cityMpg: String
   fuelType: String
   highwayMpg: String
+  mixedFuelConsumption: String
+  fuelTankCapacity: String
+  fuelGrade: String
+  emissionStandards: String
+  co2Emissions: String
+  rangeKm: String
 }
+
 input FuelVariantInput {
   cityMpg: String
   fuelType: String
   highwayMpg: String
+  mixedFuelConsumption: String
+  fuelTankCapacity: String
+  fuelGrade: String
+  emissionStandards: String
+  co2Emissions: String
+  rangeKm: String
 }
+
+type BrakesVariantInformation {
+  rearBrakes: String
+  frontBrakes: String
+  trailerLoadWithBreaks: String
+}
+
+input BrakesVariantInput {
+  rearBrakes: String
+  frontBrakes: String
+  trailerLoadWithBreaks: String
+}
+
+type WheelVariantInformation {
+  wheelbase: String
+  wheelSize: String
+  wheelSize: String
+  rearTrack: String
+  turningCircle: String
+}
+
+type WheelVariantInput {
+  wheelbase: String
+  wheelSize: String
+  wheelSize: String
+  rearTrack: String
+  turningCircle: String
+}
+
 input updateVehicleModelInput {
   "Product input"
   product: updateVehicleInput!
@@ -188,6 +342,7 @@ input updateVehicleModelInput {
   "ID of shop that owns the product to update"
   shopId: ID!
 }
+
 input updateVehicleInput {
   title: String
   productId: String
@@ -203,6 +358,7 @@ input updateVehicleInput {
   isDeleted: Boolean
   isVisible: Boolean
 }
+
 input updateVehicleVariantInput {
   "Product input"
   product: VehicleVariantInput!
