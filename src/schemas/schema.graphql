@@ -163,7 +163,7 @@ input VehicleVariantInput {
   steeringType: String
   engineVariant: EngineVariantInput
   fuelVariant: FuelVariantInput
-  dimensionsVariant: dimensionsVariantInput
+  dimensionsVariant: DimensionsVariantInput
   interiorVariant: InteriorVariantInput
   exteriorVariant: ExteriorVariantInput
   suspensionVariant: SuspensionVariantInput
@@ -319,14 +319,12 @@ input BrakesVariantInput {
 type WheelVariantInformation {
   wheelbase: String
   wheelSize: String
-  wheelSize: String
   rearTrack: String
   turningCircle: String
 }
 
-type WheelVariantInput {
+input WheelVariantInput {
   wheelbase: String
-  wheelSize: String
   wheelSize: String
   rearTrack: String
   turningCircle: String
