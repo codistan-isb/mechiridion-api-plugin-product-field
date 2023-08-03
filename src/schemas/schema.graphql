@@ -355,6 +355,7 @@ input updateVehicleInput {
   description: String
   isDeleted: Boolean
   isVisible: Boolean
+  carClass: String
 }
 
 input updateVehicleVariantInput {
