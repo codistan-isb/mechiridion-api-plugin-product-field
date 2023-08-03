@@ -15,12 +15,12 @@ export default async function updateVehicleVariant(
   const { product: productInput, productId, shopId } = input;
   const { collections } = context;
   const { VehicleVariant } = collections;
-  if (!context.authToken) {
-    throw new ReactionError("access-denied", "Please Login First");
-  }
-  if (context.user === undefined || context.user === null) {
-    throw new ReactionError("access-denied", "Please Login First");
-  }
+  // if (!context.authToken) {
+  //   throw new ReactionError("access-denied", "Please Login First");
+  // }
+  // if (context.user === undefined || context.user === null) {
+  //   throw new ReactionError("access-denied", "Please Login First");
+  // }
 
   const updateVehicleVariantResponse =
     await context.mutations.updateVehicleVariant(context, {

@@ -107,6 +107,13 @@ export default async function updateVehicleModel(context, input) {
     updates["description"] = productInput.description;
     updatedFields.push("description");
   }
+  if (
+    typeof productInput.carClass === "string" ||
+    productInput.carClass === null
+  ) {
+    updates["carClass"] = productInput.carClass;
+    updatedFields.push("carClass");
+  }
   console.log("updates :: ", updates);
   console.log("updatedFields :: ", updatedFields);
   if (updatedFields.length === 0) {
