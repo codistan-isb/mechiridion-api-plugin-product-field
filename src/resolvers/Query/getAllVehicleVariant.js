@@ -6,12 +6,12 @@ export default async function getAllVehicleVariant(
   context,
   info
 ) {
-  console.log("args Query: ", args);
+  // console.log("args Query: ", args);
   const { ...connectionArgs } = args;
 
   const getAllVehicleVariantResponse =
-    await context.queries.getAllVehicleVariant(context, args.input);
-  console.log("getAllVehicleModelResponse ", getAllVehicleVariantResponse);
+    await context.queries.getAllVehicleVariant(context, args);
+  // console.log("getAllVehicleModelResponse ", getAllVehicleVariantResponse);
 
   return getPaginatedResponse(getAllVehicleVariantResponse, connectionArgs, {
     includeHasNextPage: wasFieldRequested("pageInfo.hasNextPage", info),

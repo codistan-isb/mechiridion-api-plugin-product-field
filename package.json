@@ -2,7 +2,7 @@
   "name": "@codistan-isb/mechiridion-api-plugin-product-field",
   "description": "Boilerplate plugin for the Reaction API",
   "label": "Product Plugin Updation",
-  "version": "6.7.8",
+  "version": "6.7.11",
   "main": "index.js",
   "type": "module",
   "engines": {

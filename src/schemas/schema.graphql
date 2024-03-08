@@ -290,18 +290,14 @@ input updateVehicleModelInput {
 input updateVehicleInput {
   title: String
   productId: String
-  releaseYear: String
-  bodyType: String
-  engineType: String
-  transmissionType: String
-  fuelType: String
-  driveType: String
-  seatingCapacity: Int
-  priceRange: Float
-  description: String
+  update: String
+  name: String
+  id: String
+  prototype: String
+  modelYear: String
+  generationID: String
   isDeleted: Boolean
   isVisible: Boolean
-  carClass: String
 }
 input updateVehicleVariantInput {
   "Product input"
@@ -329,7 +325,7 @@ extend type Mutation {
 }
 extend type Query {
   getAllVehicleModel(
-    # searchQuery: String
+    searchQuery: String
     "Return only results that come after this cursor. Use this with `first` to specify the number of results to return."
     after: ConnectionCursor
     "Return only results that come before this cursor. Use this with `last` to specify the number of results to return."
@@ -346,7 +342,8 @@ extend type Query {
     sortBy: AccountSortByField = timeSent
   ): vehicleModelConnection!
   getVehicleModelById(id: ID!): VehicleModel
-  getAllVehicleVariant( # searchQuery: String
+  getAllVehicleVariant( 
+    searchQuery: String
     "Return only results that come after this cursor. Use this with `first` to specify the number of results to return."
     after: ConnectionCursor
     "Return only results that come before this cursor. Use this with `last` to specify the number of results to return."

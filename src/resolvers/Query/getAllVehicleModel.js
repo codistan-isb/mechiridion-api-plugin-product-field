@@ -1,14 +1,14 @@
 import getPaginatedResponse from "@reactioncommerce/api-utils/graphql/getPaginatedResponse.js";
 import wasFieldRequested from "@reactioncommerce/api-utils/graphql/wasFieldRequested.js";
 export default async function getAllVehicleModel(parent, args, context, info) {
-  console.log("args Query: ", args);
+  // console.log("args Query: ", args);
   const { ...connectionArgs } = args;
 
   const getAllVehicleModelResponse = await context.queries.getAllVehicleModel(
     context,
-    args.input
+    args
   );
-  console.log("getAllVehicleModelResponse ", getAllVehicleModelResponse);
+  // console.log("getAllVehicleModelResponse ", getAllVehicleModelResponse);
 
   // return getAllVehicleModelResponse;
   return getPaginatedResponse(getAllVehicleModelResponse, connectionArgs, {
